@@ -15,6 +15,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
+    authorize @restaurant
   end
 
   # GET /restaurants/1/edit
@@ -24,7 +25,9 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    # @restaurant = Restaurant.new(restaurant_params.merge(user: current_user))
+
+    @restaurant = current_user.restaurants.build(restaurant_params)
 
     respond_to do |format|
       if @restaurant.save
