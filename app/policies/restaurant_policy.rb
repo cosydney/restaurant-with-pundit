@@ -4,7 +4,14 @@ class RestaurantPolicy < ApplicationPolicy
       scope
     end
   end
-  def new?
+
+  # optional
+
+  def show?
+    true # all users can see all restaurants
+  end
+
+  def create?
     true
   end
 

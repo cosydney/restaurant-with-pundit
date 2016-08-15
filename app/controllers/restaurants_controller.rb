@@ -28,6 +28,7 @@ class RestaurantsController < ApplicationController
     # @restaurant = Restaurant.new(restaurant_params.merge(user: current_user))
 
     @restaurant = current_user.restaurants.build(restaurant_params)
+    authorize @restaurant
 
     respond_to do |format|
       if @restaurant.save
@@ -68,6 +69,7 @@ class RestaurantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
+      authorize @restaurant
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
